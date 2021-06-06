@@ -1,9 +1,3 @@
-# TODO: account for areas below mean sea level
-# TODO: account for areas that are already at new sea level
-# TODO: add feature to give area incresed by sea level rise
-# TODO: replace gdal's polygonization by grass's polygonization
-# TODO: some post-processing
-
 import numpy as np
 import gdal
 import os

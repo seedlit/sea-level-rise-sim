@@ -21,7 +21,7 @@ def get_bounds_from_raster(raster_path):
 if __name__ == "__main__":
 
     # define inputs ---------------------------------------
-    dem_path = "/home/naman/Desktop/side_projects/world_sea_level_rise/data/dems/global/india_90m/india_merged_360m_clipped.tif"
+    dem_path = ""
     out_dir = (
         "/home/naman/Desktop/side_projects/world_sea_level_rise/india_batch_outputs"
     )

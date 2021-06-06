@@ -1,17 +1,3 @@
-# TODO: add text
-# TODO: can also add image to basemap witg transparency
-# TODO: Background methods - arcgisimage - highres - important
-# TODO: can add rivers (map.drawrivers()) and also river flooding in next version
-# TODO: can add wmsimage
-# TODO: add map.colorbar to represent sea level rise values
-# TODO: add drawmapscale
-# TODO: from mpl_toolkits.basemap import interp - will be useful while handling DEM and RGB of different resolutions
-# TODO: is_land will be useful while implementing will-you-drown?
-# TODO: multiple subplots gif'
-# TODO: inset plots gif will be useful when input will be a single lat-lon --> this point can be zoomed in inset
-# TODO: add other basemaps like terrain, releif, etc. besides RGB
-# TODO: Simplify shapefile
-
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
