@@ -1,8 +1,15 @@
+"""
+Simulation of sea level rise - identifying which areas will be drowned.
+Author: Naman Jain
+        naman.jain@btech2015.iitgn.ac.in
+        www.namanji.wixsite.com/naman/
+"""
+
 import os
 import gdal
 from multiprocessing import Pool
-from sea_level_rise import generate_flooded_shp
-from generate_flood_screenshot import save_screenshot, generate_gif
+from src.sea_level_rise import generate_flooded_shp
+from src.generate_flood_screenshot import save_screenshot, generate_gif
 
 
 def get_bounds_from_raster(raster_path):
@@ -21,14 +28,14 @@ def get_bounds_from_raster(raster_path):
 if __name__ == "__main__":
 
     # define inputs ---------------------------------------
-    dem_path = ""  # path to the source DEM (Digital Elevation Model)
-    out_dir = ""  # path to the directory where all the files will be generated
-    num_processes = 1  # number of processes levaraging multiprocessing. Increase this to speed up computations
+    dem_path = ""   # path to the source DEM (Digital Elevation Model)
+    out_dir = ""    # path to the directory where all the files will be generated
+    num_processes = 1    # number of processes levaraging multiprocessing. Increase this to speed up computations
     start_sea_level_cm = 0
-    end_sea_level_cm = 500  # end level till which we want to simulate sea level rise
-    step_size_cm = 100  # rise sea level by this amount in each step
-    gif_image_duration = 0.15  # time in seconds between each image in the gif. One image is generated corresponding to each sea level
-    target_epsg = 4326  # target crs. I have not tested it with other espg codes
+    end_sea_level_cm = 500   # end level till which we want to simulate sea level rise
+    step_size_cm = 100       # rise sea level by this amount in each step
+    gif_image_duration = 0.15   # time in seconds between each image in the gif. One image is generated corresponding to each sea level
+    target_epsg = 4326    # target crs. I have not tested it with other espg codes
 
     # this part generates the flooded tifs and shapfiles
     print("Generating the flooded DEMs and shapfiles")
