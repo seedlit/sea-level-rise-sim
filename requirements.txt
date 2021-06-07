@@ -1,0 +1,6 @@
+numpy
+imageio
+matplotlib
+GDAL==3.0.4
+https://github.com/matplotlib/basemap/archive/master.zip
+elevation

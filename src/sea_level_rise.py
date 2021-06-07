@@ -2,11 +2,9 @@ import numpy as np
 import gdal
 import os
 import osr, ogr, gdal
-import geopandas as gpd
-import geoplot as gplt
+import matlplotlib.pyplot as plt
 
-# import matlplotlib.pyplot as plt
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 from multiprocessing import Pool
 
 
@@ -48,31 +46,6 @@ def save_array_as_geotif(array, source_tif_path, out_path):
     dataset = None
 
 
-def polygonize_raster(img_path, out_path):
-    try:
-        sourceRaster = gdal.Open(img_path)
-        band = sourceRaster.GetRasterBand(1)
-        driver = ogr.GetDriverByName("ESRI Shapefile")
-        outShp = out_path
-        # If shapefile already exist, delete it
-        if os.path.exists(outShp):
-            driver.DeleteDataSource(outShp)
-        outDatasource = driver.CreateDataSource(outShp)
-        # get proj from raster
-        srs = osr.SpatialReference()
-        srs.ImportFromWkt(sourceRaster.GetProjectionRef())
-        # create layer with proj
-        outLayer = outDatasource.CreateLayer(outShp, srs)
-        # Add class column (0,255) to shapefile
-        newField = ogr.FieldDefn("DN", ogr.OFTInteger)
-        outLayer.CreateField(newField)
-        gdal.Polygonize(band, None, outLayer, 0, [], callback=None)
-        outDatasource.Destroy()
-        sourceRaster = None
-    except Exception as e:
-        print("gdal Polygonize Error: " + str(e))
-
-
 def remove_background(shp_path, remove_DN_value=0):
     ds = ogr.Open(shp_path, update=True)  # True allows to edit the shapefile
     lyr = ds.GetLayer()
@@ -85,17 +58,11 @@ def remove_background(shp_path, remove_DN_value=0):
     ds.Destroy()
 
 
-def plot_poly_vector_file(vector_path):
-    vector = gpd.read_file(vector_path)
-    gplt.polyplot(vector)
-    plt.show()
-
-
-def raster_to_vector(raster, vector, temp_variable):
+def raster_to_vector(raster_path, vector_path, temp_variable):
     cmd = (
         'grass -c {}  {}_MyMap --exec bash -c "r.import input={} output=prediction; r.to.vect input=prediction output=polygon type=area; '
         'v.out.ogr input=polygon output={} format="ESRI_Shapefile" --overwrite"'.format(
-            raster, temp_variable, raster, vector
+            raster_path, temp_variable, raster_path, vector_path
         )
     )
     rmdir = "rm -r ./{}_MyMap".format(temp_variable)
@@ -116,7 +83,6 @@ def generate_flooded_shp(dem_path, sea_level_rise, out_dir):
     from time import time
 
     start_time = time()
-    # polygonize_raster(out_dem_path, out_shp_path)
     raster_to_vector(out_dem_path, out_shp_path, int(sea_level_rise * 100))
     print("polygonization took {} seconds".format(time() - start_time))
     remove_background(out_shp_path, 0)

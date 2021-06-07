@@ -84,9 +84,7 @@ if __name__ == "__main__":
     target_epsg = 4326
     num_processes = 3
     src_dir = ""
-    out_img_dir = (
-        "/home/naman/Desktop/side_projects/world_sea_level_rise/india_batch_screenshots"
-    )
+    out_img_dir = ""
 
     os.makedirs(out_img_dir, exist_ok=True)
     task_list = []
