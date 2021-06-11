@@ -32,7 +32,7 @@ def save_array_as_geotif(array, source_tif_path, out_path):
         depth = 1
     source_tif = gdal.Open(source_tif_path)
     driver = gdal.GetDriverByName("GTiff")
-    dataset = driver.Create(out_path, width, height, depth, gdal.GDT_Float32)
+    dataset = driver.Create(out_path, width, height, depth, gdal.GDT_Byte)
     if depth != 1:
         for i in range(depth):
             dataset.GetRasterBand(i + 1).WriteArray(array[:, :, i])
