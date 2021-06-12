@@ -21,7 +21,7 @@ def get_bounds_from_raster(raster_path):
     left = geotrans[0]
     top = geotrans[3]
     right = geotrans[0] + (geotrans[1] * x_size)
-    bottom = geotrans[3] + (geotrans[4] * y_size)
+    bottom = geotrans[3] + (geotrans[5] * y_size)
     return left, bottom, right, top
 
 
